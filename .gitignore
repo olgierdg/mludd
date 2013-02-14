@@ -2,6 +2,7 @@
 papers
 *.pdf
 *.png
+k-means/*.png
 
 # and andlogger
 Andlogger1v2
