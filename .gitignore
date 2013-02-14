@@ -1,0 +1,14 @@
+# don't commit papers
+papers
+*.pdf
+*.png
+
+# and andlogger
+Andlogger1v2
+
+# backup files
+*~
+
+# octave trash
+octave-core
+.#*
