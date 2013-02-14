@@ -16,7 +16,7 @@ function plotData(X, idx, centroids)
   endif
   
   scatter(X(: ,1), X(: ,2), 10, colors);
-  scatter(centroids(:, 1), centroids(:, 2), 15, palette(1:2, :), "x");
+  scatter(centroids(:, 1), centroids(:, 2), 15, palette(1:(end-1), :), "x");
   
   if h
     hold off;

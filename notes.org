@@ -1,0 +1,20 @@
+#+STARTUP: hidestars
+
+* Przydatne linki
+** Android
+*** Sqlite
+**** http://www.androidhive.info/2011/11/android-sqlite-database-tutorial/
+**** http://www.vogella.com/articles/AndroidSQLite/article.html
+**** Ciekawostka, obsługa bazy a la ActiveRecord z RoR: https://github.com/pardom/ActiveAndroid
+*** Services
+**** http://www.androiddevblog.net/android/service-applications-in-android-part-1
+*** GPS logging
+**** http://code.google.com/p/gpslogger/source/browse/trunk/GPSLogger/src/com/prom2m/android/gpslogger/service/GPSLoggerService.java -- example logger
+**** http://www.androidhive.info/2012/07/android-gps-location-manager-tutorial/
+**** http://developer.android.com/training/basics/location/index.html
+***** StackOverflow
+****** http://stackoverflow.com/questions/4443660/android-service-for-gps-sensor-logging
+****** http://stackoverflow.com/questions/8828639/android-get-gps-location-via-a-servic
+*** Machine Learning
+**** NDK + C libraries
+***** http://en.wikipedia.org/wiki/GNU_Scientific_Library
