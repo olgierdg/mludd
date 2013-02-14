@@ -1,5 +1,0 @@
-#+STARTUP: hidestars
-* Przydatne linki
-** Implementacja
-*** Frameworki do Javy
-**** http://mahout.apache.org/ 
