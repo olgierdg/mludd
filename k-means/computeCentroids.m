@@ -13,7 +13,13 @@ function centroids = computeCentroids(X, idx, K)
 
   for i = 1:K
     data = X(idx == i, :);
-    centroids(i, :) = mean(data);
+    
+    % if data contains only one row
+    if size(data, 1) == 1
+      centroids(i, :) = data;
+    else
+      centroids(i, :) = mean(data);
+    endif
   endfor
          
 endfunction

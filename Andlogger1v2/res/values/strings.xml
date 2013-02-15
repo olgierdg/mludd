@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Andlogger</string>
+    <string name="preview_name">Log Preview</string>        
+    
+    <string name="collector_on">On</string>
+    <string name="collector_off">Off</string>
+    
+    <string name="menu_settings">Settings</string>
+    <string name="menu_preview">Log Preview</string>    
+    
+    <string name="collector_label_wifi">Wifi</string>
+    <string name="collector_label_bt">Bluetooth</string>
+    <string name="collector_label_gps">GPS</string>
+    <string name="collector_label_acc">Accelerometer</string>  
+    <string name="collector_label_gyr">Gyroscope</string>  
+    <string name="collector_label_light">Light</string>  
+    <string name="collector_label_prox">Proximity</string>  
+
+    <string name="debug_reset_label">DEBUG RESET</string>
+</resources>
