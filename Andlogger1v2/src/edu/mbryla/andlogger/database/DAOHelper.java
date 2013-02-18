@@ -9,16 +9,21 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import edu.mbryla.andlogger.database.query.QueryBuilder;
 
 
 /**
+ * A helper class for implementing DAOs.
+ *
  * @author mateusz
+ * @param <T>
+ *            Type of the object stored in the database. Must extend
+ *            DatabaseRow.
  */
-public abstract class DAOHelper<T extends DatabaseRow> extends
-        SQLiteOpenHelper implements DAO<T> {
+public abstract class DAOHelper<T extends DatabaseRow> extends SQLiteOpenHelper
+        implements DAO<T> {
     public static final String SQLITE_ROWID = "_ROWID_";
-    public static final String KEY_FIELD = SQLITE_ROWID + " " + Type.KEY;
 
     public DAOHelper(Context context, String name, CursorFactory factory,
             int version) {
@@ -33,6 +38,7 @@ public abstract class DAOHelper<T extends DatabaseRow> extends
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d("dupa", "created table " + getTableName());
         db.execSQL(getTableSchema());
     }
 
@@ -48,6 +54,10 @@ public abstract class DAOHelper<T extends DatabaseRow> extends
         onCreate(db);
     }
 
+    /*
+     * (non-Javadoc)
+     * @see edu.mbryla.andlogger.database.DAO#save(java.lang.Object)
+     */
     @Override
     public void save(T item) {
         SQLiteDatabase db = getWritableDatabase();
@@ -58,6 +68,10 @@ public abstract class DAOHelper<T extends DatabaseRow> extends
         db.close();
     }
 
+    /*
+     * (non-Javadoc)
+     * @see edu.mbryla.andlogger.database.DAO#load(long)
+     */
     @Override
     public T load(long id) {
         T item = null;
@@ -70,55 +84,108 @@ public abstract class DAOHelper<T extends DatabaseRow> extends
             cursor.moveToFirst();
             item = readItem(cursor);
         }
+        cursor.close();
 
         return item;
     }
 
+    /*
+     * (non-Javadoc)
+     * @see edu.mbryla.andlogger.database.DAO#loadAll()
+     */
     @Override
     public List<T> loadAll() {
         List<T> all = new ArrayList<T>();
 
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery(QueryBuilder.dropTable(getTableName()) + getTableName() + ";", null);
+        Cursor cursor = db.rawQuery(QueryBuilder.selectAll(getTableName()),
+                null);
 
         if (cursor.moveToFirst()) {
-            do {
+            while (!cursor.isAfterLast()) {
                 all.add(readItem(cursor));
-            } while (cursor.moveToNext());
+                cursor.moveToNext();
+            }
         }
+        cursor.close();
 
         return all;
     }
 
+    /*
+     * (non-Javadoc)
+     * @see edu.mbryla.andlogger.database.DAO#update(java.lang.Object)
+     */
     @Override
     public int update(T item) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = prepareContentValues(item);
 
-        return db.update(getTableName(), values, SQLITE_ROWID + "=?",
+        int updated = db.update(getTableName(), values, SQLITE_ROWID + "=?",
                 new String[] { String.valueOf(item.getId()) });
+        db.close();
+
+        return updated;
     }
 
+    /*
+     * (non-Javadoc)
+     * @see edu.mbryla.andlogger.database.DAO#delete(java.lang.Object)
+     */
     @Override
     public void delete(T item) {
         SQLiteDatabase db = getWritableDatabase();
         db.delete(getTableName(), SQLITE_ROWID + "=?",
                 new String[] { String.valueOf(item.getId()) });
+        db.close();
     }
 
+    /*
+     * (non-Javadoc)
+     * @see edu.mbryla.andlogger.database.DAO#count()
+     */
     @Override
     public int count() {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery(QueryBuilder.count(getTableName()) + getTableName() + ";", null);
-        return cursor.getInt(0);
+
+        Cursor cursor = db.rawQuery(QueryBuilder.selectAll(getTableName()),
+                null);
+        int count = cursor.getCount();
+        cursor.close();
+
+        return count;
     }
 
+    /**
+     * Returns a string containing a "CREATE TABLE ..." query.
+     *
+     * @return A schema string.
+     */
     protected abstract String getTableSchema();
 
+    /**
+     * Returns the name of the table.
+     *
+     * @return Table name.
+     */
     protected abstract String getTableName();
 
+    /**
+     * Converts the object to the ContentValues representation.
+     *
+     * @param item
+     *            An object of type T.
+     * @return ContentValues object.
+     */
     protected abstract ContentValues prepareContentValues(T item);
 
+    /**
+     * Parses a datatable row to an object.
+     *
+     * @param cursor
+     *            Datatable cursor, pointing to a row.
+     * @return An object.
+     */
     protected abstract T readItem(Cursor cursor);
 
 }

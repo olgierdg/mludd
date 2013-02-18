@@ -9,6 +9,10 @@ k-means/*.png
 
 # backup files
 *~
+*.swp
+
+# explicit ignores
+*.ignore
 
 # octave trash
 k-means/octave-core

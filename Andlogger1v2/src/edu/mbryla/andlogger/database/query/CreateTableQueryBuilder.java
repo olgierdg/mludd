@@ -3,7 +3,6 @@ package edu.mbryla.andlogger.database.query;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
-import edu.mbryla.andlogger.database.Type;
 
 
 /**
@@ -11,12 +10,18 @@ import edu.mbryla.andlogger.database.Type;
  */
 public class CreateTableQueryBuilder extends QueryBuilder {
     private static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS ";
+    private static final String DEFAULT_KEY_ID = "_id";
 
     private String tableName;
     private LinkedHashMap<String, String> columns = new LinkedHashMap<String, String>();
+    // TODO table constraints
 
     protected CreateTableQueryBuilder(String tableName) {
         this.tableName = tableName;
+    }
+
+    public CreateTableQueryBuilder addPrimaryKey() {
+        return addPrimaryKey(DEFAULT_KEY_ID);
     }
 
     public CreateTableQueryBuilder addPrimaryKey(String name) {

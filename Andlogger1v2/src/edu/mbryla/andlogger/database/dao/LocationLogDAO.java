@@ -10,9 +10,9 @@ import android.content.Context;
 import android.database.Cursor;
 import edu.mbryla.andlogger.database.DAOHelper;
 import edu.mbryla.andlogger.database.Database;
-import edu.mbryla.andlogger.database.Type;
 import edu.mbryla.andlogger.database.models.LocationLog;
 import edu.mbryla.andlogger.database.query.QueryBuilder;
+import edu.mbryla.andlogger.database.query.Type;
 
 
 /**
@@ -22,7 +22,6 @@ public class LocationLogDAO extends DAOHelper<LocationLog> {
     public final static String TABLE_NAME = "locationlog";
 
     // database columns
-    private static final String TABLE_ID = "_id";
     private static final String TABLE_TIMESTAMP = "timestamp";
     private static final String TABLE_LATITUDE = "latitude";
     private static final String TABLE_LONGITUDE = "longitude";
@@ -30,9 +29,9 @@ public class LocationLogDAO extends DAOHelper<LocationLog> {
     private static final String TABLE_ACCURACCY = "accuraccy";
     private static final String TABLE_SPEED = "speed";
 
-    // queries
+    // schema
     private static final String TABLE_CREATE = QueryBuilder.createTable(TABLE_NAME)
-            .addPrimaryKey(TABLE_ID)
+            .addPrimaryKey()
             .addColumn(TABLE_TIMESTAMP, Type.TIMESTAMP, Type.Nullable.NOTNULL)
             .addColumn(TABLE_LATITUDE, Type.REAL, Type.Nullable.NOTNULL)
             .addColumn(TABLE_LONGITUDE, Type.REAL, Type.Nullable.NOTNULL)
@@ -45,16 +44,25 @@ public class LocationLogDAO extends DAOHelper<LocationLog> {
         super(context, Database.DATABASE_NAME, null, Database.DATABASE_VERSION);
     }
 
+    /* (non-Javadoc)
+     * @see edu.mbryla.andlogger.database.DAOHelper#getTableSchema()
+     */
     @Override
     protected String getTableSchema() {
         return TABLE_CREATE;
     }
 
+    /* (non-Javadoc)
+     * @see edu.mbryla.andlogger.database.DAOHelper#getTableName()
+     */
     @Override
     protected String getTableName() {
         return TABLE_NAME;
     }
 
+    /* (non-Javadoc)
+     * @see edu.mbryla.andlogger.database.DAOHelper#prepareContentValues(edu.mbryla.andlogger.database.DatabaseRow)
+     */
     @Override
     protected ContentValues prepareContentValues(LocationLog item) {
         ContentValues values = new ContentValues();
@@ -67,6 +75,9 @@ public class LocationLogDAO extends DAOHelper<LocationLog> {
         return values;
     }
 
+    /* (non-Javadoc)
+     * @see edu.mbryla.andlogger.database.DAOHelper#readItem(android.database.Cursor)
+     */
     @Override
     protected LocationLog readItem(Cursor cursor) {
         LocationLog loc = new LocationLog();

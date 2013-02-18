@@ -8,6 +8,7 @@
 **** Ciekawostka, obsługa bazy a la ActiveRecord z RoR: https://github.com/pardom/ActiveAndroid
 *** Services
 **** http://www.androiddevblog.net/android/service-applications-in-android-part-1
+**** http://developer.android.com/guide/components/services.html
 *** GPS logging
 **** http://code.google.com/p/gpslogger/source/browse/trunk/GPSLogger/src/com/prom2m/android/gpslogger/service/GPSLoggerService.java -- example logger
 **** http://www.androidhive.info/2012/07/android-gps-location-manager-tutorial/
@@ -18,3 +19,9 @@
 *** Machine Learning
 **** NDK + C libraries
 ***** http://en.wikipedia.org/wiki/GNU_Scientific_Library
+*** ListView
+**** http://www.vogella.com/articles/AndroidListView/article.html
+**** http://www.mkyong.com/android/android-listview-example/
+*** Sensors
+**** http://developer.android.com/guide/topics/sensors/sensors_overview.html
+**** http://www.vogella.com/articles/AndroidSensor/article.html

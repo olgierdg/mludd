@@ -6,6 +6,8 @@ import edu.mbryla.andlogger.database.DatabaseRow;
 
 
 /**
+ * Class representing the log of the gps tracker.
+ *
  * @author mateusz
  */
 public class LocationLog implements DatabaseRow {
@@ -73,6 +75,10 @@ public class LocationLog implements DatabaseRow {
         this.speed = speed;
     }
 
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         StringBuffer buf = new StringBuffer("LocationLog: ");

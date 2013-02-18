@@ -1,10 +1,11 @@
-package edu.mbryla.andlogger.database;
+package edu.mbryla.andlogger.database.query;
 
 public enum Type {
-    KEY("INTEGER PRIMARY KEY AUTOINCREMENT"), // remove autoincrement ?? (a tad bit slower)
+    KEY("INTEGER PRIMARY KEY AUTOINCREMENT"),
     INTEGER("INTEGER"),
     REAL("REAL"),
-    STRING("STRING"),
+    TEXT("TEXT"),
+    BLOB("BLOB"),
     TIMESTAMP("TIMESTAMP");
 
     private String str;

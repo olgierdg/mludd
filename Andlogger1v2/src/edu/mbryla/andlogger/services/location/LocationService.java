@@ -28,7 +28,6 @@ public class LocationService extends Service implements LocationListener {
         super();
     }
 
-    LocationService service = this;
     Timer locationTimeoutTimer = null;
 
     TimerTask timerTask = new TimerTask() {
@@ -52,7 +51,7 @@ public class LocationService extends Service implements LocationListener {
                 logDao.save(log);
             }
 
-            service.stopSelf();
+            LocationService.this.stopSelf();
         }
     };
 
