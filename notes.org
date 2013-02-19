@@ -1,5 +1,4 @@
 #+STARTUP: hidestars
-
 * Przydatne linki
 ** Android
 *** Sqlite

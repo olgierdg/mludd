@@ -10,7 +10,7 @@ import edu.mbryla.andlogger.database.DatabaseRow;
  *
  * @author mateusz
  */
-public class LocationLog implements DatabaseRow {
+public class LocationLog implements DatabaseRow, DbLog {
     private long id;
     private Timestamp timestamp;
     private double latitude;
@@ -81,7 +81,7 @@ public class LocationLog implements DatabaseRow {
      */
     @Override
     public String toString() {
-        StringBuffer buf = new StringBuffer("LocationLog: ");
+        StringBuffer buf = new StringBuffer("Location: ");
 
         buf.append(id).append(", ").append(timestamp).append(", ")
                 .append(latitude).append(", ").append(longitude).append(", ")

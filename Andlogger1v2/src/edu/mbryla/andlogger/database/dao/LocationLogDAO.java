@@ -67,7 +67,7 @@ public class LocationLogDAO extends DAOHelper<LocationLog> {
     protected ContentValues prepareContentValues(LocationLog item) {
         ContentValues values = new ContentValues();
         values.put(TABLE_TIMESTAMP, item.getTimestamp().toString());
-        values.put(TABLE_LATITUDE, item.getAltitude());
+        values.put(TABLE_LATITUDE, item.getLatitude());
         values.put(TABLE_LONGITUDE, item.getLongitude());
         values.put(TABLE_ALTITUDE, item.getAltitude());
         values.put(TABLE_ACCURACCY, item.getAccuracy());

@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import edu.mbryla.andlogger.database.DatabaseRow;
 
 
-public class AccelerationLog implements DatabaseRow {
+public class AccelerationLog implements DatabaseRow, DbLog {
     private long id;
     private Timestamp timestamp;
     private float x, y, z;
@@ -50,4 +50,13 @@ public class AccelerationLog implements DatabaseRow {
         this.z = z;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder buf = new StringBuilder("Acceleration: ");
+
+        buf.append(id).append(", ").append(timestamp).append(", ").append(x)
+                .append(", ").append(y).append(", ").append(z).append(";");
+
+        return buf.toString();
+    }
 }
