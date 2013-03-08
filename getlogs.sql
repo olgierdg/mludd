@@ -4,4 +4,5 @@
 .nullvalue NA
 
 --SELECT timestamp, data FROM logs;
-SELECT data FROM logs;
+SELECT latitude, longitude FROM locationlog;
+

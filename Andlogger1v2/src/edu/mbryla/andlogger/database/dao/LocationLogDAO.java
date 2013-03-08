@@ -41,7 +41,7 @@ public class LocationLogDAO extends DAOHelper<LocationLog> {
             .build();
 
     public LocationLogDAO(Context context) {
-        super(context, Database.DATABASE_NAME, null, Database.DATABASE_VERSION);
+        super(context, Database.NAME, null, Database.VERSION);
     }
 
     /* (non-Javadoc)

@@ -58,7 +58,7 @@ function optK = jumpMethod(X, varargin)
     xlabel("K");
     ylabel("Raw distortion");
 
-    subplot(1, 3, 2);
+   py subplot(1, 3, 2);
     plot(tfDist(2:end));
     xlabel("K");
     ylabel("Transformed distortion");

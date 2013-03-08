@@ -17,6 +17,9 @@ k-means/*.png
 # octave trash
 k-means/octave-core
 
+## pyc files
+*.pyc
+
 ## Android application gitignore
 # eclipse project
 .classpath

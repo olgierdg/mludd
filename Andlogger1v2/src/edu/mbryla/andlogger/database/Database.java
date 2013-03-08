@@ -1,6 +1,6 @@
 package edu.mbryla.andlogger.database;
 
 public interface Database {
-    String DATABASE_NAME = "andlogger.db";
-    int DATABASE_VERSION = 3;
+    String NAME = "andlogger.db";
+    int VERSION = 3;
 }

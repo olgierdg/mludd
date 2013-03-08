@@ -30,7 +30,7 @@ public class AccelerationLogDAO extends DAOHelper<AccelerationLog> {
             .build();
 
     public AccelerationLogDAO(Context context) {
-        super(context, Database.DATABASE_NAME, null, Database.DATABASE_VERSION);
+        super(context, Database.NAME, null, Database.VERSION);
     }
 
     @Override
