@@ -30,4 +30,4 @@ Alternatively, without using pip:
 
 ### matplotlib dates as numbers
 Maybe matplotlib has support for datetime objects?
-(Link)[http://stackoverflow.com/questions/7513262/matplotlib-large-set-of-colors-for-plots]
+[Link](http://stackoverflow.com/questions/7513262/matplotlib-large-set-of-colors-for-plots)
