@@ -15,7 +15,8 @@ Alternatively, without using pip:
 
     sudo apt-get install python-pandas python-numpy python-scipy python-matplotlib python-dateutil
 
-### parsing csv
+### some useful ideas
+#### parsing csv
 
     reader = csv.csvreader(csvfile)
     result = np.array([[magic(col) for col in row] for row in reader])
@@ -28,6 +29,6 @@ Alternatively, without using pip:
         else:
             return int(s)
 
-### matplotlib dates as numbers
+#### matplotlib dates as numbers
 Maybe matplotlib has support for datetime objects?
 [Link](http://stackoverflow.com/questions/7513262/matplotlib-large-set-of-colors-for-plots)
