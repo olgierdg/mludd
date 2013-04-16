@@ -1,0 +1,74 @@
+#+TITLE: Machine Learning User Domain Discovery
+#+AUTHOR: Olgierd Grodzki, Mateusz Rzeszutek
+#+OPTIONS: toc:t todo:nil ^:{}
+#+STARTUP: beamer
+#+STARTUP: hidestars
+
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation, 10pt]
+#+BEAMER_FRAME_LEVEL: 2
+
+#+LATEX_HEADER: \usepackage{amsfonts}
+#+LATEX_HEADER: \usepackage{amsmath}
+#+LaTeX_HEADER: \usetheme{Madrid}
+#+LaTeX_HEADER: \usefonttheme{structurebold}
+#+LaTeX_HEADER: \usecolortheme{default}
+#+LaTeX_HEADER: \beamertemplateballitem
+#+LaTeX_HEADER: \setbeamersize{text margin left=5mm}
+#+LaTeX_HEADER: \setbeamercovered{transparent}
+#+LaTeX_HEADER: \setbeamertemplate{navigation symbols}{}
+
+#+LaTeX_HEADER: \AtBeginSection[]{\frame<handout:0>{\frametitle[allowframebreaks]{Presentation Outline}\tableofcontents[current,currentsubsection,hideothersubsections]}}
+
+#+LaTeX_HEADER: \institute[AGH-UST]{Institute of Applied Computer science\\ AGH University of Science and Technology}
+
+#+LaTeX_HEADER: \usepackage[english]{babel}
+#+LaTeX_HEADER: \usepackage{polski}
+
+* Opis problemu
+** Opis zagadnienia
++ problem klasyfikacji
++ wykorzsytanie k-means i automatycznego doboru K
+
+* Użyte algorytmy (wstęp teoretyczny)
+** K-means (1 strona, ogólny zarys)
+** An information theoretic approach
+** Opis całości
+1. Splajny
+2. Próbkowanie
+3. Znalezienie K
+4. K-means
+
+* Wyniki algorytmu
+** Wyykresyyy
+
+* Do zrobienia
+** Logger na Androida
+*** Akcelerometr + GPS
+** Clustering dla odcinków w trasie
+** Implementacja na Androidzie
+*** Jak?
+*** Zbieranie danych i co 24h obróbka
+*** Biblioteki numeryczne
+** Integracja z silnikami reguł
+
+* The end                                                   :B_ignoreheading:
+  :PROPERTIES:
+  :BEAMER_env: ignoreheading
+  :END:
+** 
+#+BEGIN_LaTeX
+  \begin{center}
+    \large{
+      Thank you for your attention!
+      \\ 
+      \vfill
+      Any questions? 
+      \vfill
+      ~~~~\url{http://geist.agh.edu.pl}
+    }
+    \vspace{1em}
+    \\\includegraphics[scale=0.13]{img/geist-logo.png}~~~\includegraphics[scale=0.10]{img/agh-logo.png}
+  \end{center}
+  
+#+END_LaTeX

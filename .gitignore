@@ -1,11 +1,5 @@
 # don't commit papers
 papers
-*.pdf
-*.png
-k-means/*.png
-
-# and andlogger
-#Andlogger1v2
 
 # backup files
 *~
@@ -14,8 +8,9 @@ k-means/*.png
 # explicit ignores
 *.ignore
 
-# octave trash
-k-means/octave-core
+## octave trash
+clustering-octave/octave-core
+clustering-octave/*.png
 
 ## pyc files
 *.pyc
@@ -25,23 +20,29 @@ k-means/octave-core
 .classpath
 .project
 .settings
-
 # built application files
 *.apk
 *.ap_
-
 # files for the dex VM
 *.dex
-
 # Java class files
 *.class
-
 # generated files
 bin/
 gen/
-
 # Local configuration file (sdk path, etc)
 local.properties
 
-# svn
+## svn
 .svn
+
+## doc
+# latex export trash
+doc/*.tex
+doc/*.aux
+doc/*.log
+doc/*.out
+doc/*.nav
+doc/*.pyg
+doc/*.snm
+doc/*.toc
