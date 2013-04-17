@@ -25,3 +25,11 @@ def load_data_from_db(filename):
     
     conn.close()
     return pd.DataFrame(dict)
+
+def interpData_to_dataframe(interp):
+    dict = {'latitude': interp[:, 0],
+            'longitude': interp[:, 1]}
+    return pd.DataFrame(dict).astype('float64')
+
+
+
