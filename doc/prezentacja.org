@@ -23,15 +23,41 @@
 #+LaTeX_HEADER: \institute[AGH-UST]{Institute of Applied Computer science\\ AGH University of Science and Technology}
 
 #+LaTeX_HEADER: \usepackage[english]{babel}
-#+LaTeX_HEADER: \usepackage{polski}
 
-* Opis problemu
-** Opis zagadnienia
-+ problem klasyfikacji
-+ wykorzsytanie k-means i automatycznego doboru K
+#+LaTeX_HEADER: \DeclareMathOperator*{\argmin}{arg\,min}
+#+LaTeX_HEADER: \DeclareMathOperator*{\argmax}{arg\,max}
 
-* Theory
+* Introduction
+** Problem description
+The goal of this project is to create an Android application which changes
+its user interface depending on the user's location - the collected GPS data 
+has to be clustered into 'domains' using a clustering algotrithm and possibly 
+some other data.
+
+** Problem description, continued
+For algorithm prototyping we used the Python Programming Language with
+NumPy, SciPy, pandas and matplotlib libraries.
+
+* Theory and implementation
 ** K-means
+*** Input:                                               :B_normal:
+    :PROPERTIES:
+    :BEAMER_env: normal
+    :END:
++ $K$ -- number of clusters
++ $\{x^{(1)}, ..., x^{(m)}\}$ -- training set
+
+*** Algorithm:                                                     :B_normal:
+    :PROPERTIES:
+    :BEAMER_env: normal
+    :END:
+1. Randomly initialize /K/ cluster centroids $\mu_1$, $\mu_2$, ..., $\mu_K \in \mathbb{R}^n$
+2. Repeat until convergence:
+   1. *Cluster assignment step* -- for $i \in \{1, ..., m\}$: \\
+      $c^{(i)}$ := index (from 1 to /K/) of cluster centroid closest to $x^{(i)}$ ($\argmin\limits_k \|x^{(i)} - \mu_k\|^2$)
+   2. *Update step* -- for $k \in \{1, ..., K\}$: \\
+      $\mu_K$ := average (mean) of points assigned to cluster /k/
+
 ** Distortion
 The distortion is defined as follows:
 #+BEGIN_LaTeX
@@ -41,7 +67,7 @@ The distortion is defined as follows:
     \mathbf{c}_1, ..., \mathbf{c}_K
   }
   E\big[
-  (\mathbf{X} - \mathbf{c}_{\mathbf{X}})^T
+  (\mathbf{X} - \mathbf{c}_{\mathbf{X}})
   \Gamma^{-1}
   (\mathbf{X} - \mathbf{c}_{\mathbf{X}})^T
   \big]
@@ -90,12 +116,12 @@ Our implementation:
 #+END_SRC
 
 ** Finding the number of clusters in a data set
-An information theoretic approach algorithm:
-+ compute distortion $d(k)$ for all $1 < K < n$, using a standard clustering algorithm (K-means)
-+ choose a transformation power, $Y > 0$; a typical value is $\frac{p}{2}$
-+ transform the distortion curve by a negative power: $D(K) = d(K)^{-Y}$
-+ calculate jumps: $J(K) = D(K) - D(K -1)$
-+ the largest jump ($K^* = \text{argmax}_K J(K)$) represents the best choice for the number of clusters
+An information theoretic approach algorithm \cite{information-theoretic-approach}:
+1. compute distortion $d(k)$ for all $1 < K < n$, using a standard clustering algorithm (K-means)
+2. choose a transformation power, $Y > 0$; a typical value is $\frac{p}{2}$
+3. transform the distortion curve by a negative power: $D(K) = d(K)^{-Y}$
+4. calculate jumps: $J(K) = D(K) - D(K -1)$
+5. the largest jump ($K^* = \argmax\limits_K J(K)$) represents the best choice for the number of clusters
 
 ** An information theoretic approach -- implementation
 Our implementation:
@@ -104,9 +130,9 @@ Our implementation:
   import scipy.cluster.vq as cluster
   
   def jump_method(data, n = None, max_iterations = 10):
+      M, N = data.shape
       if n is None:
           n = int(np.sqrt(M))
-      M, N = data.shape
       Y = 0.5 * N
       tf_dist = np.zeros(n + 1)
       jump = np.zeros(n)
@@ -129,7 +155,6 @@ Our implementation:
 #+END_SRC
 
 ** Example distortion curves
-#+ATTR_LaTeX: scale=0.26
 [[file:img/distortion.png]]
 
 ** Our data clustering algorithm
@@ -138,23 +163,70 @@ Our implementation:
 3. Finding the number of clusters
 4. K-means
 
-* Wyniki algorytmu
-** Wyykresyyy
+* Algorithm output
+** Data
+[[file:img/data.png]]
 
-* Do zrobienia
-** Logger na Androida
-*** Akcelerometr + GPS
-** Clustering dla odcinków w trasie
-** Implementacja na Androidzie
-*** Jak?
-*** Zbieranie danych i co 24h obróbka
-*** Biblioteki numeryczne
-** Integracja z silnikami reguł
+** Interpolation: latitude
+[[file:img/lat_interp.png]]
+
+** Interpolation: longitude
+[[file:img/lon_interp.png]]
+
+** Distortion curve
+[[file:img/dist.png]]
+
+** Clustered data
+[[file:img/data-clustered.png]]
+
+** Clustered data
+[[file:img/data-clustered2.png]]
+
+** Clustered data
+[[file:img/data-clustered3.png]]
+
+** Clustered data
+[[file:img/data-clustered4.png]]
+
+** Clustered data
+[[file:img/data-clustered5.png]]
+
+* Future work
+** Android implementation
+1. GPS Logger has to be rewritten from scratch, this time fully implementing
+   Location Strategies described in Android API Guides
+2. Logger could be extended with the addition of accelerometer data collection,
+   which could prove useful in discovering of e.g. the 'Traffic' or 'Movement' 
+   domains, as well as in extending the interval between consecutive GPS data logs.
+3. Data collection and processing model has to bo designed
+4. A numerical library has to be picked, 2 solutions proposed:
+   - Java libraries -- translation into Dalvik format (whol JARs or selected classes)
+   - NDK with C libraries
+5. Integration with a rule framework, e.g HeaRTDroid
+
+** Algorithm improvement
+*** Clustering while in travel                                     :B_normal:
+    :PROPERTIES:
+    :BEAMER_env: normal
+    :END:
+How to cluster the data collected while travelling?
++ Several clusters, or
++ One cluster ("the road")
 
 * The end                                                   :B_ignoreheading:
   :PROPERTIES:
   :BEAMER_env: ignoreheading
   :END:
+** References
+#+BEGIN_LaTeX
+  \begin{thebibliography}{10}    
+  \bibitem{information-theoretic-approach}
+    Catherine A. Sugar and Gareth M. James
+    \newblock {\em Finding the number of clusters in a data set: An information theoretic approach}
+    \newblock Marshall School of Business, University of Southern California
+  \end{thebibliography}
+  
+#+END_LaTeX
 ** 
 #+BEGIN_LaTeX
   \begin{center}
